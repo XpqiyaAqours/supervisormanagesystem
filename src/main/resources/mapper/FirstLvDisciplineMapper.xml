@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smsys.system.mapper.FirstLvDisciplineMapper">
+    <select id="getFirstLvDisciplineDetail" resultType="com.smsys.system.model.FirstLvDisciplineDetail">
+        SELECT
+            a.id,
+            first_lv_discipline_no AS firstLvDisciplineNo,
+            first_lv_discipline_name AS firstLvDisciplineName
+        FROM
+            sys_first_lv_discipline a INNER JOIN sys_user b ON a.user_id = b.id
+        WHERE
+            b.id = #{id}
+
+    </select>
+    <select id="getSecondLvDisciplineInfoById" resultType="com.smsys.system.entity.SecondLvDiscipline">
+        SELECT b.*
+        FROM sys_first_lv_discipline a INNER JOIN sys_second_lv_discipline b
+                                                  ON a.first_lv_discipline_no = b.belong_first_lv_discipline_no
+        WHERE a.id = #{id}
+
+    </select>
+    <select id="getByNo" resultType="com.smsys.system.entity.FirstLvDiscipline">
+        SELECT *
+        FROM sys_first_lv_discipline
+        WHERE first_lv_discipline_no = #{no}
+
+    </select>
+
+</mapper>

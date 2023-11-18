@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smsys.system.mapper.PaperMapper">
+    <select id="getByResultId" resultType="com.smsys.system.entity.Paper">
+        SELECT
+            a.*
+        From result_paper a INNER JOIN result_resultlist b ON a.result_id = b.result_id
+        Where a.result_id = #{id}
+    </select>
+
+</mapper>

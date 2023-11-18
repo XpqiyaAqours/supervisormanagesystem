@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smsys.system.mapper.CollegeMapper">
+
+    <select id="getCollegeDetail" resultType="com.smsys.system.model.CollegeDetail">
+        SELECT
+            a.id,
+            college_no AS collegeNo, -- 使用AS关键字将数据库列名映射到Java属性名
+            college_name AS collegeName,
+            USER,
+            auditor
+        FROM
+            sys_college a
+                INNER JOIN sys_user b ON a.user_id = b.id
+        WHERE
+            b.id = #{id}
+    </select>
+</mapper>

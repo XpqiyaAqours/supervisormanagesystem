@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smsys.system.mapper.SecondLvDisciplineMapper">
+    <select id="getSecondLvDisciplineDetail" resultType="com.smsys.system.model.SecondLvDisciplineDetail">
+        SELECT
+            a.id,
+            second_lv_discipline_no AS secondLvDisciplineNo,
+            second_lv_discipline_name AS secondLvDisciplineName,
+            belong_first_lv_discipline_no AS belongFirstLvDisciplineNo
+        FROM
+            sys_second_lv_discipline a INNER JOIN sys_user b ON a.user_id = b.id
+        WHERE
+            b.id = #{id}
+
+    </select>
+
+</mapper>
