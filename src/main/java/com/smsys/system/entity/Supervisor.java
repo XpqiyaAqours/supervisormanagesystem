@@ -77,7 +77,7 @@ public class Supervisor implements Serializable {
     /**
      * 0为未审核，1为未通过，2为通过
      */
-    private Byte passCheck;
+    private Byte status;
 
     private Byte isDeleted;
 
@@ -225,12 +225,12 @@ public class Supervisor implements Serializable {
         this.graduateSchoolCheck = graduateSchoolCheck;
     }
 
-    public Byte getPassCheck() {
-        return passCheck;
+    public Byte getStatus() {
+        return status;
     }
 
-    public void setPassCheck(Byte passCheck) {
-        this.passCheck = passCheck;
+    public void setStatus(Byte status) {
+        this.status = status;
     }
 
     public Byte getIsDeleted() {
@@ -260,7 +260,7 @@ public class Supervisor implements Serializable {
             ", researchProjectsCheck = " + researchProjectsCheck +
             ", researchResultsCheck = " + researchResultsCheck +
             ", graduateSchoolCheck = " + graduateSchoolCheck +
-            ", passCheck = " + passCheck +
+            ", status = " + status +
             ", isDeleted = " + isDeleted +
         "}";
     }

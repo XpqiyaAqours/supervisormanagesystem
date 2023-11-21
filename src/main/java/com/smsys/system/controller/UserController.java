@@ -88,8 +88,8 @@ public class UserController {
     }
 
     @PostMapping("/logout")
-    public String logout(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
-        userService.logout(session, request, response);
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        userService.logout(request, response);
         String data = "登出成功";
         return data;
     }
@@ -496,6 +496,8 @@ public class UserController {
                     supervisor.setUserId(userId);
                     supervisor.setSupervisorNo(supervisorDTO.getSupervisorNo());
                     supervisor.setSupervisorName(supervisorDTO.getSupervisorName());
+                    supervisor.setBelongCollege(supervisorDTO.getBelongCollege());
+                    supervisor.setBelongSecondLvDisciplineNo(supervisorDTO.getBelongSecondLvDisciplineNo());
 
                     supervisorService.save(supervisor);
                 }

@@ -34,6 +34,9 @@ public class ResponseAdvice implements ResponseBodyAdvice {
         if ("/system/supervisor/export".equals(requestPath)) {
             return body;
         }
+        if ("/system/supervisor/exportlist".equals(requestPath)) {
+            return body;
+        }
         if(body instanceof String){	// 如果Controller直接返回String的话，SpringBoot是直接返回，故我们需要手动转换成json。
             return objectMapper.writeValueAsString(ResultData.success(body));
         }

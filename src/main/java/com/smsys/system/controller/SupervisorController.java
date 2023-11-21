@@ -59,6 +59,8 @@ public class SupervisorController {
     //修改信息
     @PutMapping
     public String updateSupervisor(@RequestBody Supervisor supervisor){
+        Byte status = 1;
+        supervisor.setStatus(status);
         supervisorService.updateById(supervisor);
         String result = "修改信息成功";
         return result;
@@ -88,7 +90,7 @@ public class SupervisorController {
             @RequestParam(value = "researchProjectsCheck", required = false) Byte researchProjectsCheck,
             @RequestParam(value = "researchResultsCheck", required = false) Byte researchResultsCheck,
             @RequestParam(value = "graduateSchoolCheck", required = false) Byte graduateSchoolCheck,
-            @RequestParam(value = "passCheck", required = false) Byte passCheck,
+            @RequestParam(value = "status", required = false) Byte status,
             @RequestParam(value = "pageNo") long pageNo,
             @RequestParam(value = "pageSize") long pageSize) {
 
@@ -110,7 +112,7 @@ public class SupervisorController {
                 .eq(researchProjectsCheck != null, Supervisor::getResearchProjectsCheck, researchProjectsCheck)
                 .eq(researchResultsCheck != null, Supervisor::getResearchResultsCheck, researchResultsCheck)
                 .eq(graduateSchoolCheck != null, Supervisor::getGraduateSchoolCheck, graduateSchoolCheck)
-                .eq(passCheck != null, Supervisor::getPassCheck, passCheck);
+                .eq(status != null, Supervisor::getStatus, status);
 
         Page<Supervisor> Page = new Page<>(pageNo, pageSize);
         supervisorService.page(Page, wrapper);
@@ -120,48 +122,12 @@ public class SupervisorController {
         return data;
     }
     //审核状态修改
-    @PutMapping("/researchprojectscheck")
-    public String updateResearchProjectsCheck(@RequestParam(value = "id") Integer id,
-                                              @RequestParam(value = "check") Byte check){
-        Supervisor supervisor = new Supervisor();
-        supervisor.setId(id);
-        supervisor.setResearchProjectsCheck(check);
-        Boolean rowsAffected = supervisorService.updateById(supervisor);
-        if (rowsAffected) {
-            return "更新成功";
-        } else {
-            return "更新失败"; }
-    }
-    @PutMapping("/researchresultscheck")
-    public String updateResearchResultsCheck(@RequestParam(value = "id") Integer id,
-                                              @RequestParam(value = "check") Byte check){
-        Supervisor supervisor = new Supervisor();
-        supervisor.setId(id);
-        supervisor.setResearchResultsCheck(check);
-        Boolean rowsAffected = supervisorService.updateById(supervisor);
-        if (rowsAffected) {
-            return "更新成功";
-        } else {
-            return "更新失败"; }
-    }
-    @PutMapping("/graduateschoolcheck")
-    public String updateGraduateSchoolCheck(@RequestParam(value = "id") Integer id,
-                                             @RequestParam(value = "check") Byte check){
-        Supervisor supervisor = new Supervisor();
-        supervisor.setId(id);
-        supervisor.setGraduateSchoolCheck(check);
-        Boolean rowsAffected = supervisorService.updateById(supervisor);
-        if (rowsAffected) {
-            return "更新成功";
-        } else {
-            return "更新失败"; }
-    }
-    @PutMapping("/passcheck")
+    @PutMapping("/status")
     public String updatePassCheck(@RequestParam(value = "id") Integer id,
-                                  @RequestParam(value = "check") Byte check){
+                                  @RequestParam(value = "status") Byte status){
         Supervisor supervisor = new Supervisor();
         supervisor.setId(id);
-        supervisor.setPassCheck(check);
+        supervisor.setStatus(status);
         Boolean rowsAffected = supervisorService.updateById(supervisor);
         if (rowsAffected) {
             return "更新成功";
@@ -549,7 +515,7 @@ public class SupervisorController {
             return ResultData.fail(500, "导入失败");
         }
     }
-
+    //使用easypoi的replace注释配合数据类型强转实现了魔法值的转换，所以以下方法废弃了
     private Supervisor mapDTOToEntity(SupervisorInfoDTO dto) {
         Supervisor supervisor = new Supervisor();
         supervisor.setId(dto.getId());
@@ -564,15 +530,15 @@ public class SupervisorController {
         return supervisor;
     }
 
-    //打印通过审核的导师名单
+    //打印各种审核状态下的导师名单
     @GetMapping("/exportlist")
-    public ResponseEntity<byte[]> exportSupervisorsListToExcel() {
+    public ResponseEntity<byte[]> exportSupervisorsListToExcel(@RequestParam("status") Byte status) {
         try {
             List<Supervisor> supervisorList = supervisorService.list();
             List<Supervisor> filteredSupervisorList = new ArrayList<>();
 
             for (Supervisor supervisor : supervisorList) {
-                if (supervisor.getPassCheck() == 2) {
+                if (supervisor.getStatus() == status) {
                     filteredSupervisorList.add(supervisor);
                 }
             }
@@ -609,6 +575,7 @@ public class SupervisorController {
 
         return outputStream.toByteArray();
     }
+
     //查询对应二级学科点信息
     @Autowired
     private ISupervisorSecondLvDisciplineService supervisorSecondLvDisciplineService;

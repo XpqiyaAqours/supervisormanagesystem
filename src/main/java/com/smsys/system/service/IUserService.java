@@ -21,6 +21,6 @@ public interface IUserService extends IService<User> {
 
     Map<String, Object> getUserInfo(HttpServletRequest req, HttpServletResponse resp);
 
-    void logout(HttpSession session, HttpServletRequest request, HttpServletResponse response);
+    void logout(HttpServletRequest request, HttpServletResponse response);
 
 }
