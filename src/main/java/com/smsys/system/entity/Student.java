@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * <p>
@@ -74,9 +75,9 @@ public class Student implements Serializable {
         this.studentName = studentName;
     }
 
-    public Byte getSex() {
-        return sex;
-    }
+    //public Byte getSex() {return sex;}
+
+    public String getSex() { return Objects.equals(sex, (byte) 1) ? "男" : "女"; }
 
     public void setSex(Byte sex) {
         this.sex = sex;
@@ -104,7 +105,7 @@ public class Student implements Serializable {
             "id = " + id +
             ", studentNo = " + studentNo +
             ", studentName = " + studentName +
-            ", sex = " + sex +
+            ", sex = " + getSex() +
             ", belongCollege = " + belongCollege +
             ", isDeleted = " + isDeleted +
         "}";

@@ -113,17 +113,13 @@ public class Supervisor implements Serializable {
         this.supervisorName = supervisorName;
     }
 
-    public Byte getSex() {
-        return sex;
-    }
+    //public Byte getSex() { return sex; }
 
     public void setSex(Byte sex) {
         this.sex = sex;
     }
 
-    public String getSexStr() {
-        return Objects.equals(sex, (byte) 1) ? "男" : "女";
-    }
+    public String getSex() { return Objects.equals(sex, (byte) 1) ? "男" : "女"; }
 
     public String getJob() {
         return job;
@@ -165,15 +161,13 @@ public class Supervisor implements Serializable {
         this.researchAreas = researchAreas;
     }
 
-    public Byte getOffCampus() {
-        return offCampus;
-    }
+    //public Byte getOffCampus() {return offCampus;}
 
     public void setOffCampus(Byte offCampus) {
         this.offCampus = offCampus;
     }
 
-    public String getOffCampusStr() {
+    public String getOffCampus() {
         return Objects.equals(sex, (byte) 1) ? "是" : "否";
     }
 
@@ -247,13 +241,13 @@ public class Supervisor implements Serializable {
             "id = " + id +
             ", supervisorNo = " + supervisorNo +
             ", supervisorName = " + supervisorName +
-            ", sex = " + sex +
+            ", sex = " + getSex() +
             ", job = " + job +
             ", educationalBackground = " + educationalBackground +
             ", degree = " + degree +
             ", birthDate = " + birthDate +
             ", researchAreas = " + researchAreas +
-            ", offCampus = " + offCampus +
+            ", offCampus = " + getOffCampus() +
             ", honoraryTitles = " + honoraryTitles +
             ", belongCollege = " + belongCollege +
             ", basicInformationCheck = " + belongSecondLvDisciplineNo +
