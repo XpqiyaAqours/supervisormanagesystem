@@ -107,6 +107,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             if (loginUser != null) {
                 System.out.println("=======getUserInfo has found the Redis=======");
                 Map<String, Object> data = new HashMap<>();
+                data.put("id",loginUser.getId());
                 data.put("name", loginUser.getUsername());
                 data.put("role", loginUser.getRole());
                 System.out.println("=======getUserInfo return the data=======");
