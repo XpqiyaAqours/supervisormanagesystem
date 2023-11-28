@@ -33,6 +33,8 @@ public class Vertical implements Serializable {
 
     private String endDate;
 
+    private String level;
+
     private String subject;
 
     private String rank;
@@ -97,6 +99,14 @@ public class Vertical implements Serializable {
         this.endDate = endDate;
     }
 
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
     public String getSubject() {
         return subject;
     }
@@ -139,6 +149,7 @@ public class Vertical implements Serializable {
             ", funding = " + funding +
             ", startDate = " + startDate +
             ", endDate = " + endDate +
+            ", level = " + level +
             ", subject = " + subject +
             ", rank = " + rank +
             ", status = " + status +

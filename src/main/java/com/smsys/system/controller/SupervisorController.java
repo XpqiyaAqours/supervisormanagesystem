@@ -59,8 +59,6 @@ public class SupervisorController {
     //修改信息
     @PutMapping
     public String updateSupervisor(@RequestBody Supervisor supervisor){
-        Byte status = 1;
-        supervisor.setStatus(status);
         supervisorService.updateById(supervisor);
         String result = "修改信息成功";
         return result;

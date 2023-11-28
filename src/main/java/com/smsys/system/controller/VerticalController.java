@@ -37,6 +37,7 @@ public class VerticalController {
             @RequestParam(value = "funding", required = false) String funding,
             @RequestParam(value = "startDate", required = false) String startDate,
             @RequestParam(value = "endDate", required = false) String endDate,
+            @RequestParam(value = "level", required = false) String level,
             @RequestParam(value = "subject", required = false) String subject,
             @RequestParam(value = "rank", required = false) String rank,
             @RequestParam(value = "status", required = false) Byte status,
@@ -53,6 +54,7 @@ public class VerticalController {
                 .eq(StringUtils.hasLength(funding), Vertical::getFunding, funding)
                 .eq(StringUtils.hasLength(startDate), Vertical::getStartDate, startDate)
                 .eq(StringUtils.hasLength(endDate), Vertical::getEndDate, endDate)
+                .eq(StringUtils.hasLength(level), Vertical::getLevel, level)
                 .eq(StringUtils.hasLength(subject), Vertical::getSubject, subject)
                 .eq(StringUtils.hasLength(rank), Vertical::getRank, rank)
                 .eq(status != null, Vertical::getStatus, status)

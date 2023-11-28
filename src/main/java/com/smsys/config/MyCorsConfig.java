@@ -12,7 +12,7 @@ public class MyCorsConfig {
     @Bean
     public CorsFilter corsFilters(){
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.addAllowedOrigin("http://localhost:8888");//允许跨域的前端服务器
+        corsConfiguration.addAllowedOrigin("http://localhost:443");//允许跨域的前端服务器
         corsConfiguration.setAllowCredentials(true);
         corsConfiguration.addAllowedMethod("*");//允许的请求方法，默认全选
         corsConfiguration.addAllowedHeader("*");//允许的头信息

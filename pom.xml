@@ -11,7 +11,7 @@
     <groupId>com.smsys</groupId>
     <artifactId>smsys</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>smsys</name>
     <description>Demo project for Spring Boot</description>
     <properties>
